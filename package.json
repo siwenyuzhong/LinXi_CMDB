@@ -1,0 +1,22 @@
+{
+  "name": "promptflow",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run cmdb\" \"npm run ai-graph\" \"npm run monitor\" \"npm run client\"",
+    "backend": "concurrently \"npm run server\" \"npm run cmdb\" \"npm run ai-graph\"",
+    "frontend": "npm run client",
+    "server": "cd server && node index.js",
+    "cmdb": "cd cmdb && go run .",
+    "ai-graph": "cd ai-graph-server && go run .",
+    "monitor": "cd monitor && go run .",
+    "client": "cd client && npm run dev",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1"
+  }
+}

@@ -1,0 +1,21 @@
+### 双机部署方案
+    双机部署 cmdb 需关注以下配置：
+       1. 数据库连接
+          - 两台 cmdb 实例连接同一个 PostgreSQL（config.yaml 中的 PG_SERVER 地址改为内网 IP 或负载均衡地址），无需改代码。
+
+       2. 任务调度器（Scheduler）
+           当前两个分布式相关配置已就绪：
+           - InstanceID: uuid.New().String() → 每实例自动唯一
+           - ShardID: 硬编码为 0 → 需改为不同值（如实例1=0, 实例2=1），否则并发抢锁时可能存在冲突
+
+       3. 端口
+           端口 :5003 硬编码。双机部署：
+           - 方案A：两台均用 :5003，前面加 nginx/haproxy 负载均衡
+           - 方案B：如需各自暴露独立端口，需改代码（你说不改，那就用方案A）
+
+       4. 前端 config.yaml
+            CMDB_API_BASE 需改为负载均衡地址（如 http://cmdb-lb:5003），而非 http://localhost:5003。
+
+       5. Session（会话）
+            session 存在 PG 数据库中，两实例共享同一库，用户在一台登录后另一台也能识别，无需额外配置。
+

@@ -1,0 +1,961 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "灵犀AI API",
+    "version": "1.0.0",
+    "description": "灵犀AI平台完整API文档"
+  },
+  "servers": [
+    {"url": "http://localhost:5001", "description": "Flask后端服务"},
+    {"url": "http://localhost:9080", "description": "CMDB后端服务"},
+    {"url": "http://localhost:5002", "description": "AI Graph服务"}
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["认证管理"],
+        "summary": "用户注册",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {"type": "string"},
+                  "password": {"type": "string"}
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {"200": {"description": "注册成功"}}
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["认证管理"],
+        "summary": "用户登录",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {"type": "string"},
+                  "password": {"type": "string"}
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {"200": {"description": "返回token"}}
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": ["认证管理"],
+        "summary": "获取当前用户信息",
+        "responses": {"200": {"description": "用户信息"}}
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["认证管理"],
+        "summary": "用户登出",
+        "responses": {"200": {"description": "登出成功"}}
+      }
+    },
+    "/api/models": {
+      "get": {
+        "tags": ["模型配置"],
+        "summary": "获取模型列表",
+        "parameters": [
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 10}},
+          {"name": "keyword", "in": "query", "schema": {"type": "string"}},
+          {"name": "filters", "in": "query", "schema": {"type": "string"}, "description": "JSON格式过滤条件"}
+        ],
+        "responses": {"200": {"description": "模型分页列表"}}
+      },
+      "post": {
+        "tags": ["模型配置"],
+        "summary": "创建模型",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/models/{id}": {
+      "get": {
+        "tags": ["模型配置"],
+        "summary": "获取模型详情",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "模型详情"}}
+      },
+      "put": {
+        "tags": ["模型配置"],
+        "summary": "更新模型",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["模型配置"],
+        "summary": "删除模型",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/model-instances": {
+      "get": {
+        "tags": ["模型数据"],
+        "summary": "获取模型实例列表（支持搜索、分页、过滤）",
+        "parameters": [
+          {"name": "keyword", "in": "query", "schema": {"type": "string"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 20}},
+          {"name": "filters", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "模型实例分页列表"}}
+      },
+      "post": {
+        "tags": ["模型数据"],
+        "summary": "创建模型实例",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/model-instances/{id}": {
+      "put": {
+        "tags": ["模型数据"],
+        "summary": "更新模型实例",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["模型数据"],
+        "summary": "删除模型实例",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/model-instances/batch-delete": {
+      "post": {
+        "tags": ["模型数据"],
+        "summary": "批量删除模型实例",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object", "properties": {"ids": {"type": "array", "items": {"type": "integer"}}}}}}},
+        "responses": {"200": {"description": "批量删除成功"}}
+      }
+    },
+    "/api/model-instances/meta/models": {
+      "get": {
+        "tags": ["模型数据"],
+        "summary": "获取模型实例元数据模型列表",
+        "parameters": [{"name": "per_page", "in": "query", "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "模型列表"}}
+      }
+    },
+    "/api/model-instances/meta/relation-options": {
+      "get": {
+        "tags": ["模型数据"],
+        "summary": "获取关联关系选项",
+        "parameters": [{"name": "model_definition_id", "in": "query", "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "关联关系选项"}}
+      }
+    },
+    "/api/workflows": {
+      "get": {
+        "tags": ["AI工作流"],
+        "summary": "获取AI工作流列表",
+        "responses": {"200": {"description": "工作流列表"}}
+      },
+      "post": {
+        "tags": ["AI工作流"],
+        "summary": "创建AI工作流",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/workflows/{id}": {
+      "get": {
+        "tags": ["AI工作流"],
+        "summary": "获取工作流详情",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "工作流详情"}}
+      },
+      "put": {
+        "tags": ["AI工作流"],
+        "summary": "更新工作流",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["AI工作流"],
+        "summary": "删除工作流",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/workflows/{id}/executions": {
+      "get": {
+        "tags": ["AI工作流"],
+        "summary": "获取工作流执行记录",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "执行记录列表"}}
+      }
+    },
+    "/api/workflows/{id}/executions/{execId}": {
+      "get": {
+        "tags": ["AI工作流"],
+        "summary": "获取工作流执行详情",
+        "parameters": [
+          {"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}},
+          {"name": "execId", "in": "path", "required": true, "schema": {"type": "integer"}}
+        ],
+        "responses": {"200": {"description": "执行详情"}}
+      }
+    },
+    "/api/workflows/{id}/execute-stream": {
+      "get": {
+        "tags": ["AI工作流"],
+        "summary": "流式执行工作流（EventSource）",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "SSE事件流"}}
+      }
+    },
+    "/api/tasks": {
+      "get": {
+        "tags": ["定时任务"],
+        "summary": "获取定时任务列表",
+        "responses": {"200": {"description": "任务列表"}}
+      },
+      "post": {
+        "tags": ["定时任务"],
+        "summary": "创建定时任务",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/tasks/{id}": {
+      "put": {
+        "tags": ["定时任务"],
+        "summary": "更新定时任务",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["定时任务"],
+        "summary": "删除定时任务",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/tasks/{id}/run": {
+      "post": {
+        "tags": ["定时任务"],
+        "summary": "立即执行定时任务",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "执行成功"}}
+      }
+    },
+    "/api/tasks/all-executions": {
+      "get": {
+        "tags": ["任务历史"],
+        "summary": "获取所有任务执行记录",
+        "parameters": [
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "page_size", "in": "query", "schema": {"type": "integer", "default": 20}}
+        ],
+        "responses": {"200": {"description": "执行记录分页列表"}}
+      }
+    },
+    "/api/scripts": {
+      "get": {
+        "tags": ["工具库"],
+        "summary": "获取脚本/工具列表",
+        "responses": {"200": {"description": "脚本列表"}}
+      },
+      "post": {
+        "tags": ["工具库"],
+        "summary": "创建脚本/工具",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/scripts/{id}": {
+      "put": {
+        "tags": ["工具库"],
+        "summary": "更新脚本",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["工具库"],
+        "summary": "删除脚本",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/scripts/{id}/debug-status": {
+      "patch": {
+        "tags": ["工具库"],
+        "summary": "更新脚本调试状态",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "更新成功"}}
+      }
+    },
+    "/api/debug-script": {
+      "post": {
+        "tags": ["脚本调试"],
+        "summary": "启动脚本调试任务",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "返回task_id"}}
+      }
+    },
+    "/api/debug-script/running": {
+      "get": {
+        "tags": ["脚本调试"],
+        "summary": "获取运行中的调试任务列表",
+        "responses": {"200": {"description": "运行中任务列表"}}
+      }
+    },
+    "/api/debug-script/history": {
+      "get": {
+        "tags": ["脚本调试"],
+        "summary": "获取脚本调试历史",
+        "parameters": [
+          {"name": "script_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "page_size", "in": "query", "schema": {"type": "integer", "default": 10}}
+        ],
+        "responses": {"200": {"description": "调试历史分页列表"}}
+      }
+    },
+    "/api/debug-script/{task_id}": {
+      "get": {
+        "tags": ["脚本调试"],
+        "summary": "获取调试任务状态",
+        "parameters": [{"name": "task_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "任务状态和输出"}}
+      },
+      "delete": {
+        "tags": ["脚本调试"],
+        "summary": "取消调试任务",
+        "parameters": [{"name": "task_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "取消成功"}}
+      }
+    },
+    "/api/skills": {
+      "get": {
+        "tags": ["技能管理"],
+        "summary": "获取技能列表",
+        "responses": {"200": {"description": "技能列表"}}
+      },
+      "post": {
+        "tags": ["技能管理"],
+        "summary": "创建技能",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/skills/{skill_id}": {
+      "get": {
+        "tags": ["技能管理"],
+        "summary": "获取技能详情",
+        "parameters": [{"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "技能详情"}}
+      },
+      "put": {
+        "tags": ["技能管理"],
+        "summary": "更新技能",
+        "parameters": [{"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["技能管理"],
+        "summary": "删除技能（同时删除本地目录）",
+        "parameters": [{"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/skills/{skill_id}/file": {
+      "get": {
+        "tags": ["技能管理"],
+        "summary": "读取技能目录文件",
+        "parameters": [
+          {"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}},
+          {"name": "file_path", "in": "query", "required": true, "schema": {"type": "string"}},
+          {"name": "skill_name", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "文件内容"}}
+      },
+      "post": {
+        "tags": ["技能管理"],
+        "summary": "创建技能目录文件",
+        "parameters": [{"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "创建成功"}}
+      },
+      "put": {
+        "tags": ["技能管理"],
+        "summary": "更新技能目录文件",
+        "parameters": [{"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      }
+    },
+    "/api/skills/{skill_id}/tree": {
+      "get": {
+        "tags": ["技能管理"],
+        "summary": "获取技能目录树",
+        "parameters": [
+          {"name": "skill_id", "in": "path", "required": true, "schema": {"type": "string"}},
+          {"name": "skill_name", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "目录树结构"}}
+      }
+    },
+    "/api/skill-development/chat": {
+      "post": {
+        "tags": ["AI对话"],
+        "summary": "处理技能开发对话（SSE流式）",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "SSE事件流"}}
+      }
+    },
+    "/api/skill-development/sessions": {
+      "get": {
+        "tags": ["AI对话"],
+        "summary": "获取所有对话会话列表",
+        "parameters": [{"name": "user_id", "in": "query", "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "会话列表"}}
+      }
+    },
+    "/api/skill-development/sessions/{session_id}": {
+      "get": {
+        "tags": ["AI对话"],
+        "summary": "获取指定会话详情和消息",
+        "parameters": [
+          {"name": "session_id", "in": "path", "required": true, "schema": {"type": "string"}},
+          {"name": "user_id", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "会话和消息列表"}}
+      },
+      "delete": {
+        "tags": ["AI对话"],
+        "summary": "删除对话会话",
+        "parameters": [
+          {"name": "session_id", "in": "path", "required": true, "schema": {"type": "string"}},
+          {"name": "user_id", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/skill-development/history/{session_id}": {
+      "get": {
+        "tags": ["AI对话"],
+        "summary": "获取技能开发对话历史",
+        "parameters": [{"name": "session_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "对话历史"}}
+      }
+    },
+    "/api/skill-development/execute": {
+      "post": {
+        "tags": ["AI对话"],
+        "summary": "执行技能动作",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "执行结果"}}
+      }
+    },
+    "/api/ai/command-suggest": {
+      "post": {
+        "tags": ["AI辅助"],
+        "summary": "AI命令补全建议",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "命令建议列表"}}
+      }
+    },
+    "/api/hosts": {
+      "get": {
+        "tags": ["主机管理"],
+        "summary": "获取主机列表（分页）",
+        "parameters": [
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 20}}
+        ],
+        "responses": {"200": {"description": "主机分页列表"}}
+      },
+      "post": {
+        "tags": ["主机管理"],
+        "summary": "创建主机",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/hosts/{id}": {
+      "put": {
+        "tags": ["主机管理"],
+        "summary": "更新主机",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["主机管理"],
+        "summary": "删除主机",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/hosts/{host_id}/inspect": {
+      "get": {
+        "tags": ["巡检管理"],
+        "summary": "执行主机巡检（SSE流式）",
+        "parameters": [{"name": "host_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "SSE事件流"}}
+      },
+      "post": {
+        "tags": ["巡检管理"],
+        "summary": "异步启动主机巡检",
+        "parameters": [{"name": "host_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "返回task_id"}}
+      }
+    },
+    "/api/inspect-tasks": {
+      "get": {
+        "tags": ["巡检管理"],
+        "summary": "获取巡检任务列表",
+        "parameters": [
+          {"name": "host_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "status", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "巡检任务列表"}}
+      }
+    },
+    "/api/inspect-tasks/{task_id}": {
+      "get": {
+        "tags": ["巡检管理"],
+        "summary": "获取巡检任务详情",
+        "parameters": [{"name": "task_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "任务详情"}}
+      }
+    },
+    "/api/hosts/{host_id}/ai-ssh": {
+      "post": {
+        "tags": ["SSH执行"],
+        "summary": "在目标主机执行命令（SSE流式）",
+        "parameters": [{"name": "host_id", "in": "path", "required": true, "schema": {"type": "string"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "SSE事件流"}}
+      }
+    },
+    "/api/command-blacklist": {
+      "get": {
+        "tags": ["SSH执行"],
+        "summary": "获取命令黑名单",
+        "responses": {"200": {"description": "命令黑名单列表"}}
+      }
+    },
+    "/api/ssh-history": {
+      "get": {
+        "tags": ["SSH执行"],
+        "summary": "获取SSH执行历史",
+        "parameters": [
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 20}}
+        ],
+        "responses": {"200": {"description": "SSH历史分页列表"}}
+      }
+    },
+    "/api/inspection-history": {
+      "get": {
+        "tags": ["巡检管理"],
+        "summary": "获取巡检历史记录",
+        "parameters": [
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "page_size", "in": "query", "schema": {"type": "integer", "default": 20}}
+        ],
+        "responses": {"200": {"description": "巡检历史分页列表"}}
+      }
+    },
+    "/api/model-usage/record": {
+      "post": {
+        "tags": ["模型用量"],
+        "summary": "记录模型使用情况",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "记录成功"}}
+      }
+    },
+    "/api/model-usage/stats": {
+      "get": {
+        "tags": ["模型用量"],
+        "summary": "获取模型使用统计",
+        "responses": {"200": {"description": "使用统计"}}
+      }
+    },
+    "/api/linxi-chat/sessions": {
+      "get": {
+        "tags": ["灵犀对话"],
+        "summary": "获取灵犀对话会话列表",
+        "responses": {"200": {"description": "会话列表"}}
+      },
+      "post": {
+        "tags": ["灵犀对话"],
+        "summary": "创建灵犀对话会话",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/linxi-chat/sessions/{id}": {
+      "put": {
+        "tags": ["灵犀对话"],
+        "summary": "更新对话会话",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      }
+    },
+    "/api/linxi-chat/sessions/{sessionId}/messages": {
+      "get": {
+        "tags": ["灵犀对话"],
+        "summary": "获取对话消息列表",
+        "parameters": [{"name": "sessionId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "消息列表"}}
+      },
+      "post": {
+        "tags": ["灵犀对话"],
+        "summary": "发送对话消息",
+        "parameters": [{"name": "sessionId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "发送成功"}}
+      }
+    },
+    "/api/linxi-chat/sessions/{sessionId}/messages/{msgId}": {
+      "put": {
+        "tags": ["灵犀对话"],
+        "summary": "更新对话消息",
+        "parameters": [
+          {"name": "sessionId", "in": "path", "required": true, "schema": {"type": "integer"}},
+          {"name": "msgId", "in": "path", "required": true, "schema": {"type": "integer"}}
+        ],
+        "responses": {"200": {"description": "更新成功"}}
+      }
+    },
+    "/api/platform-configs": {
+      "get": {
+        "tags": ["平台配置"],
+        "summary": "获取平台配置列表",
+        "responses": {"200": {"description": "配置列表"}}
+      },
+      "post": {
+        "tags": ["平台配置"],
+        "summary": "创建/初始化平台配置",
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/platform-configs/{id}": {
+      "put": {
+        "tags": ["平台配置"],
+        "summary": "更新平台配置（添加/删除配置项）",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      }
+    },
+    "/api/permissions": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取所有权限列表",
+        "responses": {"200": {"description": "权限列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "创建权限",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/permissions/{id}": {
+      "delete": {
+        "tags": ["权限管理"],
+        "summary": "删除权限",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/roles": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取所有角色列表",
+        "responses": {"200": {"description": "角色列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "创建角色",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/roles/{id}": {
+      "put": {
+        "tags": ["权限管理"],
+        "summary": "更新角色",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["权限管理"],
+        "summary": "删除角色",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/roles/{id}/permissions": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取角色关联的权限",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "权限列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "为角色分配权限",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "分配成功"}}
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取用户列表",
+        "responses": {"200": {"description": "用户列表"}}
+      }
+    },
+    "/api/users/{userId}/roles": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取用户角色",
+        "parameters": [{"name": "userId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "角色列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "为用户分配角色",
+        "parameters": [{"name": "userId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "分配成功"}}
+      }
+    },
+    "/api/users/{userId}/permissions": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取用户权限（含继承）",
+        "parameters": [{"name": "userId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "权限列表"}}
+      }
+    },
+    "/api/user-groups": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取用户组列表",
+        "responses": {"200": {"description": "用户组列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "创建用户组",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/user-groups/{id}": {
+      "put": {
+        "tags": ["权限管理"],
+        "summary": "更新用户组",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["权限管理"],
+        "summary": "删除用户组",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/user-groups/{id}/members": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取用户组成员",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "成员列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "添加用户组成员",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "添加成功"}}
+      }
+    },
+    "/api/user-groups/{groupId}/members/{userId}": {
+      "delete": {
+        "tags": ["权限管理"],
+        "summary": "移除用户组成员",
+        "parameters": [
+          {"name": "groupId", "in": "path", "required": true, "schema": {"type": "integer"}},
+          {"name": "userId", "in": "path", "required": true, "schema": {"type": "integer"}}
+        ],
+        "responses": {"200": {"description": "移除成功"}}
+      }
+    },
+    "/api/user-groups/{id}/roles": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取用户组角色",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "角色列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "为用户组分配角色",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "分配成功"}}
+      }
+    },
+    "/api/resource-permissions": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "获取资源权限列表（支持搜索分页）",
+        "parameters": [
+          {"name": "keyword", "in": "query", "schema": {"type": "string"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 20}}
+        ],
+        "responses": {"200": {"description": "资源权限分页列表"}}
+      },
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "创建资源权限",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/resource-permissions/{id}": {
+      "delete": {
+        "tags": ["权限管理"],
+        "summary": "删除资源权限",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/check-permission": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "检查当前用户是否有指定权限",
+        "parameters": [
+          {"name": "resource_type", "in": "query", "schema": {"type": "string"}},
+          {"name": "resource_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "permission", "in": "query", "required": true, "schema": {"type": "string"}}
+        ],
+        "responses": {"200": {"description": "权限检查结果"}}
+      }
+    },
+    "/api/ai-graphs": {
+      "get": {
+        "tags": ["AI图谱"],
+        "summary": "获取AI图谱列表",
+        "responses": {"200": {"description": "图谱列表"}}
+      },
+      "post": {
+        "tags": ["AI图谱"],
+        "summary": "创建AI图谱",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/ai-graphs/{id}": {
+      "get": {
+        "tags": ["AI图谱"],
+        "summary": "获取图谱详情",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "图谱详情"}}
+      },
+      "put": {
+        "tags": ["AI图谱"],
+        "summary": "更新图谱",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      },
+      "delete": {
+        "tags": ["AI图谱"],
+        "summary": "删除图谱",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "删除成功"}}
+      }
+    },
+    "/api/ai-graph/query": {
+      "post": {
+        "tags": ["AI图谱"],
+        "summary": "AI图谱自然语言查询",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"200": {"description": "查询结果"}}
+      }
+    },
+    "/api/data-validity/rules": {
+      "get": {
+        "tags": ["数据校验"],
+        "summary": "获取数据校验规则列表",
+        "parameters": [{"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 999}}],
+        "responses": {"200": {"description": "规则列表"}}
+      },
+      "post": {
+        "tags": ["数据校验"],
+        "summary": "创建校验规则",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object"}}}},
+        "responses": {"201": {"description": "创建成功"}}
+      }
+    },
+    "/api/data-validity/rules/{ruleId}": {
+      "get": {
+        "tags": ["数据校验"],
+        "summary": "获取校验规则详情",
+        "parameters": [{"name": "ruleId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "规则详情"}}
+      },
+      "put": {
+        "tags": ["数据校验"],
+        "summary": "更新校验规则",
+        "parameters": [{"name": "ruleId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "更新成功"}}
+      }
+    },
+    "/api/data-validity/rules/{ruleId}/toggle": {
+      "post": {
+        "tags": ["数据校验"],
+        "summary": "启用/禁用校验规则",
+        "parameters": [{"name": "ruleId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "切换成功"}}
+      }
+    },
+    "/api/data-validity/rules/{ruleId}/trigger": {
+      "post": {
+        "tags": ["数据校验"],
+        "summary": "触发规则立即执行",
+        "parameters": [{"name": "ruleId", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"200": {"description": "触发成功"}}
+      }
+    },
+    "/api/data-validity/results": {
+      "get": {
+        "tags": ["数据校验"],
+        "summary": "获取校验结果列表",
+        "parameters": [
+          {"name": "rule_id", "in": "query", "schema": {"type": "integer"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}},
+          {"name": "per_page", "in": "query", "schema": {"type": "integer", "default": 20}}
+        ],
+        "responses": {"200": {"description": "校验结果分页列表"}}
+      }
+    }
+  }
+}

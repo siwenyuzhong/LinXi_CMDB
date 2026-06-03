@@ -1,0 +1,60 @@
+# AI模型配置
+AI_MODEL:
+  base_url: ""
+  api_key: ""
+  model: ""
+  temperature: 0.5
+  max_tokens: 10280
+
+# 总结模型
+SUMMARIZE_MODEL:
+  base_url: ""
+  api_key: ""
+  model: ""
+  temperature: 1.0
+  max_tokens: 10280
+
+# 思考模型
+THINK_MODEL:
+  base_url: ""
+  api_key: ""
+  model: ""
+  temperature: 1.0
+  max_tokens: 10280
+
+# 请求的Flask后端API地址
+FLASK_API_BASE: 'http://127.0.0.1:5001'
+
+# CMDB Go 后端 API 地址
+CMDB_API_BASE: 'http://127.0.0.1:5003'
+
+# AI识谱 Go 后端 API 地址
+AI_GRAPH_API_BASE: 'http://127.0.0.1:5002'
+
+
+# 端口监控服务
+MONITOR:
+  port: 5005
+
+# PostGreSQL配置
+PG_SERVER:
+  pg_server_addr: ""
+  pg_server_port: 5432
+  pg_username: ""
+  pg_password: ""
+
+
+# 登录页面品牌配置
+LOGIN_PAGE:
+  brand_badge: "🦏"
+  brand_title: "AI灵犀 · 心有灵犀"
+  brand_subtitle: "新一代AI技能与工作流协同平台"
+  brand_icon: "🦏"
+
+SKILL_ROUTING_RULES:
+  - keywords: [ "CPU负载", "内存使用", "磁盘空间", "系统监控", "进程列表", "主机名" ]
+    skill: "system-watch-man"
+  - keywords: [ "日志查看", "日志搜索", "日志关键字", "inodes","文件打开数" ]
+    skill: "linux-log-troubleshoot"
+  - keywords: [ "文件备份", "文件恢复" ]
+    skill: "linux-file-backup"

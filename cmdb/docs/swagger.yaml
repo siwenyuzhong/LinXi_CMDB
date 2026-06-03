@@ -1,0 +1,3847 @@
+basePath: /api
+definitions:
+  handlers.ChatHistory:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      messages:
+        items:
+          type: integer
+        type: array
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.ExecutionRecord:
+    properties:
+      duration_ms:
+        type: integer
+      error:
+        type: string
+      finished_at:
+        type: string
+      id:
+        type: string
+      input:
+        items:
+          type: integer
+        type: array
+      node_results:
+        items:
+          type: integer
+        type: array
+      output:
+        items:
+          type: integer
+        type: array
+      started_at:
+        type: string
+      status:
+        type: string
+      workflow_id:
+        type: string
+    type: object
+  handlers.HostRecord:
+    properties:
+      auth_type:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      has_password:
+        type: boolean
+      has_private_key:
+        type: boolean
+      id:
+        type: string
+      ip_address:
+        type: string
+      name:
+        type: string
+      port:
+        type: integer
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  handlers.InspectionRecord:
+    properties:
+      analysis:
+        type: string
+      duration_ms:
+        type: integer
+      error:
+        type: string
+      finished_at:
+        type: string
+      host_id:
+        type: string
+      host_ip:
+        type: string
+      host_name:
+        type: string
+      id:
+        type: string
+      output:
+        items:
+          type: integer
+        type: array
+      started_at:
+        type: string
+      status:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.LinxiMessage:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      role:
+        type: string
+      session_id:
+        type: string
+      status:
+        type: string
+      thought:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.LinxiSession:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.ModelInstance:
+    properties:
+      created_at:
+        type: string
+      data:
+        items:
+          type: integer
+        type: array
+      id:
+        type: string
+      model_definition_id:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.ModelSetting:
+    properties:
+      category:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      fields:
+        items:
+          type: integer
+        type: array
+      id:
+        type: string
+      model_id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.OptionItem:
+    properties:
+      data:
+        items:
+          type: integer
+        type: array
+      instance_id:
+        type: string
+      label:
+        type: string
+      value:
+        type: string
+    type: object
+  handlers.PaginatedResponse:
+    properties:
+      items: {}
+      page:
+        type: integer
+      pages:
+        type: integer
+      per_page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  handlers.Permission:
+    properties:
+      action:
+        type: string
+      code:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      resource_type:
+        type: string
+    type: object
+  handlers.PlatformConfigRecord:
+    properties:
+      category:
+        type: string
+      config_key:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      enabled:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+      value: {}
+    type: object
+  handlers.RelationModel:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      model_id:
+        type: string
+      name:
+        type: string
+    type: object
+  handlers.RelationOptionsResponse:
+    properties:
+      display_field_name:
+        type: string
+      model:
+        $ref: '#/definitions/handlers.RelationModel'
+      options:
+        items:
+          $ref: '#/definitions/handlers.OptionItem'
+        type: array
+      primary_field_name:
+        type: string
+    type: object
+  handlers.ResourcePermission:
+    properties:
+      created_at:
+        type: string
+      effect:
+        type: string
+      group_id:
+        type: string
+      id:
+        type: string
+      permission_code:
+        type: string
+      resource_id:
+        type: string
+      resource_type:
+        type: string
+      role_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.Role:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      is_system:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  handlers.ScheduledTask:
+    properties:
+      created_at:
+        type: string
+      cron_expr:
+        type: string
+      enabled:
+        type: boolean
+      id:
+        type: string
+      input:
+        items:
+          type: integer
+        type: array
+      last_error:
+        type: string
+      last_run_at:
+        type: string
+      last_status:
+        type: string
+      name:
+        type: string
+      next_run_at:
+        type: string
+      script_id:
+        type: string
+      script_name:
+        type: string
+      type:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+      workflow_id:
+        type: string
+      workflow_name:
+        type: string
+    type: object
+  handlers.Script:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      debug_status:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.Skill:
+    properties:
+      category:
+        type: string
+      config:
+        items:
+          type: integer
+        type: array
+      created_at:
+        type: string
+      description:
+        type: string
+      icon:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+      version:
+        type: string
+    type: object
+  handlers.SkillDevMessage:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      matched_skills:
+        type: string
+      reasoning_steps:
+        type: string
+      role:
+        type: string
+      session_id:
+        type: string
+    type: object
+  handlers.SkillDevSession:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      message_count:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.SshExecutionRecord:
+    properties:
+      command:
+        type: string
+      executed_at:
+        type: string
+      host_id:
+        type: string
+      host_ip:
+        type: string
+      host_name:
+        type: string
+      id:
+        type: string
+      platform_user:
+        type: string
+      username:
+        type: string
+    type: object
+  handlers.UserGroup:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  handlers.UserGroupMember:
+    properties:
+      user_id:
+        type: string
+      username:
+        type: string
+    type: object
+  handlers.Workflow:
+    properties:
+      connections:
+        items:
+          $ref: '#/definitions/handlers.WorkflowConnection'
+        type: array
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      nodes:
+        items:
+          $ref: '#/definitions/handlers.WorkflowNode'
+        type: array
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handlers.WorkflowConnection:
+    properties:
+      from:
+        type: string
+      id:
+        type: string
+      label:
+        type: string
+      to:
+        type: string
+    type: object
+  handlers.WorkflowNode:
+    properties:
+      data:
+        additionalProperties: {}
+        type: object
+      id:
+        type: string
+      type:
+        type: string
+      x:
+        type: number
+      "y":
+        type: number
+    type: object
+  scheduler.SchedulerInfo:
+    properties:
+      instance_id:
+        type: string
+      max_workers:
+        type: integer
+      poll_interval_ms:
+        type: integer
+      running_tasks:
+        type: integer
+      uptime:
+        type: string
+    type: object
+host: localhost:9080
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+    url: http://www.example.com/support
+  description: CMDB (Configuration Management Database) - 模型配置与实例管理 API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: CMDB API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate with username and password, returns a bearer token
+      parameters:
+      - description: Username and password
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      description: Invalidate the current bearer token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Logout
+      tags:
+      - Auth
+  /auth/me:
+    get:
+      description: Return the authenticated user's info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get current user
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user account
+      parameters:
+      - description: Username and password
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register
+      tags:
+      - Auth
+  /chat:
+    post:
+      consumes:
+      - application/json
+      description: Proxy chat completion request to an LLM API with SSE streaming.
+        Records token usage.
+      parameters:
+      - description: Chat request (baseUrl, apiKey, model, messages, source)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Chat completion (SSE stream)
+      tags:
+      - Chat
+  /chat-histories:
+    get:
+      description: List all chat histories for the current user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List chat histories
+      tags:
+      - Chat Histories
+    post:
+      consumes:
+      - application/json
+      description: Create a new chat history
+      parameters:
+      - description: Chat history payload (title, messages)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ChatHistory'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create chat history
+      tags:
+      - Chat Histories
+  /chat-histories/{id}:
+    delete:
+      description: Delete a chat history by ID
+      parameters:
+      - description: Chat history ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete chat history
+      tags:
+      - Chat Histories
+    get:
+      description: Get a single chat history by ID
+      parameters:
+      - description: Chat history ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ChatHistory'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get chat history
+      tags:
+      - Chat Histories
+    put:
+      consumes:
+      - application/json
+      description: Update a chat history's title and/or messages
+      parameters:
+      - description: Chat history ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update (title, messages)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ChatHistory'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update chat history
+      tags:
+      - Chat Histories
+  /check-permission:
+    get:
+      description: Check if current user has a specific permission on a resource
+      parameters:
+      - description: Resource type
+        in: query
+        name: resource_type
+        required: true
+        type: string
+      - description: Resource ID
+        in: query
+        name: resource_id
+        required: true
+        type: string
+      - description: Permission code
+        in: query
+        name: permission
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Check permission
+      tags:
+      - Permissions
+  /hosts:
+    get:
+      description: Get paginated host list
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 5, max 50)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List hosts
+      tags:
+      - Hosts
+    post:
+      consumes:
+      - application/json
+      description: Create a new host entry
+      parameters:
+      - description: Host data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.HostRecord'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a host
+      tags:
+      - Hosts
+  /hosts/{id}:
+    delete:
+      description: Delete a host by ID
+      parameters:
+      - description: Host ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a host
+      tags:
+      - Hosts
+    get:
+      description: Get host by ID
+      parameters:
+      - description: Host ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.HostRecord'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a host
+      tags:
+      - Hosts
+    put:
+      consumes:
+      - application/json
+      description: Update host information
+      parameters:
+      - description: Host ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated host data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.HostRecord'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a host
+      tags:
+      - Hosts
+  /hosts/{id}/credentials:
+    get:
+      description: Get actual password and private key for a host (internal use only)
+      parameters:
+      - description: Host ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get host credentials
+      tags:
+      - Hosts
+  /inspection-history:
+    get:
+      description: Get paginated inspection history records
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List inspection history
+      tags:
+      - Inspection History
+    post:
+      consumes:
+      - application/json
+      description: Create a new inspection history record
+      parameters:
+      - description: Inspection record payload (host_id, host_name, host_ip, status,
+          output, error, analysis, duration_ms)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.InspectionRecord'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create inspection history
+      tags:
+      - Inspection History
+  /linxi-chat/sessions:
+    get:
+      description: List all Linxi chat sessions for the current user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List Linxi chat sessions
+      tags:
+      - Linxi Chat
+    post:
+      consumes:
+      - application/json
+      description: Create a new Linxi chat session, optionally with initial messages
+      parameters:
+      - description: Session payload (title, messages)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.LinxiSession'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create Linxi chat session
+      tags:
+      - Linxi Chat
+  /linxi-chat/sessions/{id}:
+    delete:
+      description: Delete a Linxi chat session by ID
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete Linxi chat session
+      tags:
+      - Linxi Chat
+    put:
+      consumes:
+      - application/json
+      description: Update a Linxi chat session title
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update (title)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.LinxiSession'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update Linxi chat session
+      tags:
+      - Linxi Chat
+  /linxi-chat/sessions/{id}/messages:
+    get:
+      description: List all messages in a Linxi chat session
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List Linxi chat messages
+      tags:
+      - Linxi Chat
+    post:
+      consumes:
+      - application/json
+      description: Add a message to a Linxi chat session
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Message payload (role, content, thought)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.LinxiMessage'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Add Linxi chat message
+      tags:
+      - Linxi Chat
+  /linxi-chat/sessions/{id}/messages/{msgId}:
+    put:
+      consumes:
+      - application/json
+      description: Update a message's content, thought, and/or status
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Message ID
+        in: path
+        name: msgId
+        required: true
+        type: string
+      - description: Fields to update (content, thought, status)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.LinxiMessage'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update Linxi chat message
+      tags:
+      - Linxi Chat
+  /model-instances:
+    get:
+      consumes:
+      - application/json
+      description: Get all instances for a given model definition, with optional keyword
+        search and pagination
+      parameters:
+      - description: Model definition ID
+        in: query
+        name: model_definition_id
+        required: true
+        type: string
+      - description: Search keyword for data field
+        in: query
+        name: keyword
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Paginated response with items ([]ModelInstance), total, page,
+            per_page, pages
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: List model instances
+      tags:
+      - Model Instances
+  /model-instances/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a single model instance
+      parameters:
+      - description: Instance ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Delete model instance
+      tags:
+      - Model Instances
+    get:
+      consumes:
+      - application/json
+      description: Get a single model instance by ID
+      parameters:
+      - description: Instance ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ModelInstance'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Get model instance
+      tags:
+      - Model Instances
+    put:
+      consumes:
+      - application/json
+      description: Update an existing model instance data
+      parameters:
+      - description: Instance ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated data fields
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ModelInstance'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Update model instance
+      tags:
+      - Model Instances
+  /model-instances/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: Delete multiple model instances by IDs. Failed items are skipped,
+        remaining items continue processing.
+      parameters:
+      - description: '{\'
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{\"code\":200,\"message\":\"批量删除完成，成功 N 条，失败 M 条\",\"success_count\":N,\"errors\":[...]}'
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Batch delete model instances
+      tags:
+      - Model Instances
+  /model-instances/meta/models:
+    get:
+      consumes:
+      - application/json
+      description: Get all model definitions used for creating instances, with pagination
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Paginated response with items ([]ModelSetting), total, page,
+            per_page, pages
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: List model instance models
+      tags:
+      - Model Instances
+  /model-instances/meta/relation-options:
+    get:
+      consumes:
+      - application/json
+      description: Get relation options (instances) for a given model definition
+      parameters:
+      - description: Model definition ID
+        in: query
+        name: model_definition_id
+        required: true
+        type: string
+      - description: Field name to use as display label
+        in: query
+        name: display_field
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.RelationOptionsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Get relation options
+      tags:
+      - Model Instances
+  /model-usage/daily:
+    get:
+      description: Get daily token usage breakdown for the last N days (default 7)
+      parameters:
+      - description: Number of days (default 7, max 365)
+        in: query
+        name: days
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Model usage daily
+      tags:
+      - Model Usage
+  /model-usage/record:
+    post:
+      consumes:
+      - application/json
+      description: Record a single model usage entry (token consumption)
+      parameters:
+      - description: Usage payload (model, prompt_tokens, completion_tokens, total_tokens,
+          source)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Record model usage
+      tags:
+      - Model Usage
+  /model-usage/stats:
+    get:
+      description: Get aggregated token usage stats per model
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Model usage stats
+      tags:
+      - Model Usage
+  /models:
+    get:
+      consumes:
+      - application/json
+      description: Get all model definitions for the current user, with pagination
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Paginated response with items ([]ModelSetting), total, page,
+            per_page, pages
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: List model settings
+      tags:
+      - Model Settings
+    post:
+      consumes:
+      - application/json
+      description: Create a new model definition
+      parameters:
+      - description: Model definition payload (model_id, name, description, category,
+          fields)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ModelSetting'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Create model setting
+      tags:
+      - Model Settings
+  /models/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a model definition and all its instances
+      parameters:
+      - description: Model Setting ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Delete model setting
+      tags:
+      - Model Settings
+    get:
+      consumes:
+      - application/json
+      description: Get a single model definition by ID
+      parameters:
+      - description: Model Setting ID or Model ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ModelSetting'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Get model setting
+      tags:
+      - Model Settings
+    put:
+      consumes:
+      - application/json
+      description: Update an existing model definition
+      parameters:
+      - description: Model Setting ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated model fields (model_id, name, description, category,
+          fields)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ModelSetting'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      - QueryToken: []
+      summary: Update model setting
+      tags:
+      - Model Settings
+  /permissions:
+    get:
+      description: Get all permissions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Permission'
+            type: array
+      summary: List permissions
+      tags:
+      - Permissions
+    post:
+      consumes:
+      - application/json
+      description: Create a new permission
+      parameters:
+      - description: Permission data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.Permission'
+      summary: Create a permission
+      tags:
+      - Permissions
+  /permissions/{id}:
+    delete:
+      description: Delete a permission by ID
+      parameters:
+      - description: Permission ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a permission
+      tags:
+      - Permissions
+  /platform-configs:
+    get:
+      description: Get all platform configurations
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List platform configs
+      tags:
+      - Platform Configs
+    post:
+      consumes:
+      - application/json
+      description: Create a new platform configuration
+      parameters:
+      - description: Config data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.PlatformConfigRecord'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a platform config
+      tags:
+      - Platform Configs
+  /platform-configs/{id}:
+    delete:
+      description: Delete a platform configuration
+      parameters:
+      - description: Config ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a platform config
+      tags:
+      - Platform Configs
+    get:
+      description: Get platform config by ID
+      parameters:
+      - description: Config ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PlatformConfigRecord'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a platform config
+      tags:
+      - Platform Configs
+    put:
+      consumes:
+      - application/json
+      description: Update platform configuration
+      parameters:
+      - description: Config ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated config data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PlatformConfigRecord'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a platform config
+      tags:
+      - Platform Configs
+  /platform-configs/by-key/{key}:
+    get:
+      description: Get platform config by config_key
+      parameters:
+      - description: Config key
+        in: path
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PlatformConfigRecord'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get platform config by key
+      tags:
+      - Platform Configs
+  /resource-permissions:
+    get:
+      description: Get all resource-level permissions
+      parameters:
+      - description: Filter by resource type
+        in: query
+        name: resource_type
+        type: string
+      - description: Filter by resource ID
+        in: query
+        name: resource_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.ResourcePermission'
+            type: array
+      summary: List resource permissions
+      tags:
+      - Resource Permissions
+    post:
+      consumes:
+      - application/json
+      description: Create a resource-level permission
+      parameters:
+      - description: Resource permission data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.ResourcePermission'
+      summary: Create a resource permission
+      tags:
+      - Resource Permissions
+  /resource-permissions/{id}:
+    delete:
+      description: Delete a resource-level permission
+      parameters:
+      - description: Resource permission ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a resource permission
+      tags:
+      - Resource Permissions
+  /roles:
+    get:
+      description: Get all roles
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Role'
+            type: array
+      summary: List roles
+      tags:
+      - Roles
+    post:
+      consumes:
+      - application/json
+      description: Create a new role
+      parameters:
+      - description: Role data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.Role'
+      summary: Create a role
+      tags:
+      - Roles
+  /roles/{id}:
+    delete:
+      description: Delete a role (cannot delete system roles)
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a role
+      tags:
+      - Roles
+    put:
+      consumes:
+      - application/json
+      description: Update role info
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated role data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Role'
+      summary: Update a role
+      tags:
+      - Roles
+  /roles/{id}/permissions:
+    get:
+      description: Get permissions assigned to a role
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Permission'
+            type: array
+      summary: Get role permissions
+      tags:
+      - Roles
+    post:
+      consumes:
+      - application/json
+      description: Assign permissions to a role (replaces all)
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Permission IDs
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Assign permissions to role
+      tags:
+      - Roles
+  /scheduler/info:
+    get:
+      description: Get distributed task scheduler instance info and running tasks
+        count
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/scheduler.SchedulerInfo'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Scheduler info
+      tags:
+      - Scheduler
+  /scheduler/trigger:
+    post:
+      description: Manually trigger an immediate scheduler poll cycle to check for
+        due tasks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Trigger scheduler poll
+      tags:
+      - Scheduler
+  /scripts:
+    get:
+      description: List all scripts for the current user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List scripts
+      tags:
+      - Scripts
+    post:
+      consumes:
+      - application/json
+      description: Create a new script
+      parameters:
+      - description: Script payload (name, type, content, description)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Script'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create script
+      tags:
+      - Scripts
+  /scripts/{id}:
+    delete:
+      description: Delete a script by ID
+      parameters:
+      - description: Script ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete script
+      tags:
+      - Scripts
+    get:
+      description: Get a single script by ID
+      parameters:
+      - description: Script ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Script'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get script
+      tags:
+      - Scripts
+    put:
+      consumes:
+      - application/json
+      description: Update a script's fields
+      parameters:
+      - description: Script ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update (name, type, content, description)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Script'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update script
+      tags:
+      - Scripts
+  /scripts/{id}/debug-status:
+    patch:
+      consumes:
+      - application/json
+      description: Update a script's debug_status (未通过/已通过)
+      parameters:
+      - description: Script ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: debug_status (未通过 or 已通过)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Script'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update script debug status
+      tags:
+      - Scripts
+  /skill-dev/messages:
+    post:
+      consumes:
+      - application/json
+      description: Add a message to a session
+      parameters:
+      - description: Message data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.SkillDevMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create skill dev message
+      tags:
+      - Skill Dev
+  /skill-dev/sessions:
+    get:
+      description: Get all skill development chat sessions
+      parameters:
+      - description: Filter by user ID
+        in: query
+        name: user_id
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List skill dev sessions
+      tags:
+      - Skill Dev
+    post:
+      consumes:
+      - application/json
+      description: Create a new skill development session
+      parameters:
+      - description: Session data (title, user_id)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.SkillDevSession'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create skill dev session
+      tags:
+      - Skill Dev
+  /skill-dev/sessions/{id}:
+    delete:
+      description: Delete a session and its messages (CASCADE)
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Verify user ownership
+        in: query
+        name: user_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete skill dev session
+      tags:
+      - Skill Dev
+    get:
+      description: Get a session and its messages
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Verify user ownership
+        in: query
+        name: user_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get skill dev session with messages
+      tags:
+      - Skill Dev
+    patch:
+      consumes:
+      - application/json
+      description: Update session title (e.g. after first message)
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update skill dev session title
+      tags:
+      - Skill Dev
+  /skills:
+    get:
+      description: List all skills for the current user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List skills
+      tags:
+      - Skills
+    post:
+      consumes:
+      - application/json
+      description: Create a new skill
+      parameters:
+      - description: Skill payload (name, description, version, status, config)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Skill'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create skill
+      tags:
+      - Skills
+  /skills/{id}:
+    delete:
+      description: Delete a skill by ID
+      parameters:
+      - description: Skill ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete skill
+      tags:
+      - Skills
+    get:
+      description: Get a single skill by ID
+      parameters:
+      - description: Skill ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Skill'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get skill
+      tags:
+      - Skills
+    put:
+      consumes:
+      - application/json
+      description: Update a skill (auto-increments version)
+      parameters:
+      - description: Skill ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update (name, description, status, config)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Skill'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update skill
+      tags:
+      - Skills
+  /ssh-history:
+    get:
+      description: Get paginated SSH execution history records
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 10, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List SSH execution history
+      tags:
+      - SSH History
+    post:
+      consumes:
+      - application/json
+      description: Record an SSH command execution
+      parameters:
+      - description: SSH execution record
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.SshExecutionRecord'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create SSH execution record
+      tags:
+      - SSH History
+  /tasks:
+    get:
+      description: List all scheduled tasks for the current user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List scheduled tasks
+      tags:
+      - Tasks
+    post:
+      consumes:
+      - application/json
+      description: Create a new scheduled task (workflow or script type with cron
+        expression)
+      parameters:
+      - description: Task payload (name, cron_expr, type, workflow_id, script_id,
+          input, enabled)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ScheduledTask'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create scheduled task
+      tags:
+      - Tasks
+  /tasks/{id}:
+    delete:
+      description: Delete a scheduled task by ID
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete scheduled task
+      tags:
+      - Tasks
+    get:
+      description: Get a single scheduled task by ID
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ScheduledTask'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get scheduled task
+      tags:
+      - Tasks
+    put:
+      consumes:
+      - application/json
+      description: Update a scheduled task's fields (recomputes next_run_at if cron
+        or enabled changes)
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ScheduledTask'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update scheduled task
+      tags:
+      - Tasks
+  /tasks/{id}/executions:
+    get:
+      description: List executions for a specific task
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List task executions
+      tags:
+      - Tasks
+  /tasks/{id}/run:
+    post:
+      description: Manually trigger immediate execution of a scheduled task
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Run task now
+      tags:
+      - Tasks
+  /tasks/all-executions:
+    get:
+      description: Paginated listing of all task executions across all tasks for the
+        user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List all task executions
+      tags:
+      - Tasks
+  /user-groups:
+    get:
+      description: Get all user groups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.UserGroup'
+            type: array
+      summary: List user groups
+      tags:
+      - User Groups
+    post:
+      consumes:
+      - application/json
+      description: Create a new user group
+      parameters:
+      - description: Group data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.UserGroup'
+      summary: Create a user group
+      tags:
+      - User Groups
+  /user-groups/{groupId}/members/{userId}:
+    delete:
+      description: Remove a user from a user group
+      parameters:
+      - description: Group ID
+        in: path
+        name: groupId
+        required: true
+        type: string
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Remove member from group
+      tags:
+      - User Groups
+  /user-groups/{id}:
+    delete:
+      description: Delete a user group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a user group
+      tags:
+      - User Groups
+    put:
+      consumes:
+      - application/json
+      description: Update user group info
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated group data
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UserGroup'
+      summary: Update a user group
+      tags:
+      - User Groups
+  /user-groups/{id}/members:
+    get:
+      description: Get members of a user group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.UserGroupMember'
+            type: array
+      summary: Get group members
+      tags:
+      - User Groups
+    post:
+      consumes:
+      - application/json
+      description: Add users to a user group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User IDs
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Add members to group
+      tags:
+      - User Groups
+  /user-groups/{id}/permissions:
+    get:
+      description: Get all permissions for a group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Permission'
+            type: array
+      summary: Get group effective permissions
+      tags:
+      - User Groups
+  /user-groups/{id}/roles:
+    get:
+      description: Get roles assigned to a user group
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Role'
+            type: array
+      summary: Get group roles
+      tags:
+      - User Groups
+    post:
+      consumes:
+      - application/json
+      description: Assign roles to a user group (replaces all)
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Role IDs
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Assign roles to group
+      tags:
+      - User Groups
+  /users:
+    get:
+      description: Get all users (admin)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+      summary: List users
+      tags:
+      - Users
+  /users/{id}/permissions:
+    get:
+      description: Get all permissions for a user (from direct roles)
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Permission'
+            type: array
+      summary: Get user effective permissions
+      tags:
+      - Users
+  /users/{id}/roles:
+    get:
+      description: Get roles assigned to a user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Role'
+            type: array
+      summary: Get user roles
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Assign roles to a user (replaces all)
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Role IDs
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Assign roles to user
+      tags:
+      - Users
+  /workflows:
+    get:
+      description: List all workflows for the current user
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List workflows
+      tags:
+      - Workflows
+    post:
+      consumes:
+      - application/json
+      description: Create a new workflow
+      parameters:
+      - description: Workflow payload (name, description, nodes, connections)
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Workflow'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create workflow
+      tags:
+      - Workflows
+  /workflows/{id}:
+    delete:
+      description: Delete a workflow by ID
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete workflow
+      tags:
+      - Workflows
+    get:
+      description: Get a single workflow by ID
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Workflow'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get workflow
+      tags:
+      - Workflows
+    put:
+      consumes:
+      - application/json
+      description: Update a workflow's name, description, nodes, or connections
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Fields to update
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Workflow'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update workflow
+      tags:
+      - Workflows
+  /workflows/{id}/execute:
+    post:
+      consumes:
+      - application/json
+      description: Execute a workflow synchronously and return the result
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Input variables
+        in: body
+        name: body
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Execute workflow
+      tags:
+      - Workflows
+  /workflows/{id}/execute-stream:
+    get:
+      description: Execute a workflow with real-time SSE streaming of node events
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: JSON-encoded input variables
+        in: query
+        name: input
+        type: string
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Execute workflow (streaming)
+      tags:
+      - Workflows
+  /workflows/{id}/executions:
+    get:
+      description: List execution records for a workflow
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 200)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.PaginatedResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List workflow executions
+      tags:
+      - Workflows
+  /workflows/{workflowId}/executions/{execId}:
+    get:
+      description: Get a single execution record by ID
+      parameters:
+      - description: Workflow ID
+        in: path
+        name: workflowId
+        required: true
+        type: string
+      - description: Execution ID
+        in: path
+        name: execId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ExecutionRecord'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get workflow execution
+      tags:
+      - Workflows
+swagger: "2.0"
