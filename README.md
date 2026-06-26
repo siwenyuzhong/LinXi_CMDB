@@ -54,6 +54,8 @@
 ### 日志管理
 ![日志管理](https://github.com/siwenyuzhong/LinXi_CMDB/blob/main/images/logs.png)
 
+## 更多介绍：
+https://share.note.youdao.com/s/DkDkSBEg
 
 
 
